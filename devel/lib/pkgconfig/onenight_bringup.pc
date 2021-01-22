@@ -1,0 +1,8 @@
+prefix=/home/louis/catkin_ws/devel
+
+Name: onenight_bringup
+Description: Description of onenight_bringup
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
