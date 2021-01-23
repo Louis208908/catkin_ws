@@ -49,11 +49,11 @@ public:
 
     float last_data;
 
-    float angle;
+    float yaw;
 
-    float angle2;
+    float pitch;
 
-    float angle3;
+    float roll;
 
     float last_data2;
 
@@ -123,9 +123,9 @@ public:
         count3 = 0;
         sum = 0;
         last_data = 0;
-        angle = 0;
-        angle2 = 0;
-        angle3 = 0;
+        yaw = 0;
+        pitch = 0;
+        roll = 0;
         last_data2 = 0;
         last_data3 = 0;
         CupCheckTime = 0;
@@ -142,24 +142,27 @@ public:
 
 
     void AngleTransform(float x, float y, float z, float w){
-        angle = atan2(2 * (w * z + x * y), 1 - 2 * (z * z + y * y));
-        angle *= -1;
-        angle /= 3.1415926;
-        angle *= 180;
-        if(angle < 0)
-            angle += 360;
-        angle2 = asin( 2 * (w * y - x * z));
-        angle2 *= -1;
-        angle2 /= 3.1415926;
-        angle2 *= 180;
-        if(angle2 < 0 )
-            angle2 += 360;
-        angle3 = atan2(2 * (y * z + x * w), 1 - 2 * (z * z - w * w));
-        angle3 *= -1;
-        angle3 /= 3.1415926;
-        angle3 *= 180;
-        if(angle3 < 0)
-            angle3 += 360;
+        roll = atan2(2 * (y * z + x * w), 1 - 2 * (x * x + y * y));
+        roll *= -1;
+        roll /= 3.1415926;
+        roll *= 180;
+        if(roll < 0)
+            roll += 360;
+
+        pitch = asin( 2 * (w * y - x * z));
+        pitch *= -1;
+        pitch /= 3.1415926;
+        pitch *= 180;
+        if(pitch < 0 )
+            pitch += 360;
+        
+        yaw = atan2(2 * (w * z + x * y), 1 - 2 * (z * z + y * y));
+        yaw *= -1;
+        yaw /= 3.1415926;
+        yaw *= 180;
+        if(yaw < 0)
+            yaw += 360;    
+        printf("roll = %f, pitch =  %f,yaw =  %f",roll,pitch,yaw);    
     }
 
     void markersCallback(const aruco_pose::MarkerArray::ConstPtr &markers)
@@ -168,35 +171,30 @@ public:
         if (!markers->markers.empty())
         {
             //n.getParam("CameraResult/testStart",testStart);
-            //ROS_INFO("now = %lf",now_time);
-            //ROS_INFO("start = %lf",start_time);
-            //ROS_INFO("time = %f",(now_time-start_time).toSec());
-            //if ((now_time - start_time).toSec() >= 25){
+
            if(markers->markers[0].id == 17) {
-            if(MarkerStart == 1){
-                if (MarkerCplt != 1){
-                    if(N_S_CheckTime != 5){
-                        last_data = angle;   // target angle (Used for NS detection)
-                        last_data2 = angle2;
-                        last_data2 = angle3;
+                    // if(N_S_CheckTime != 5){
+                        last_data = yaw;   // target angle (Used for NS detection)
+                        last_data2 = pitch;
+                        last_data2 = roll;
                         // ROS_INFO("id:%ld",markers->markers[0].id );
                         AngleTransform(markers->markers[0].pose.orientation.x,markers->markers[0].pose.orientation.y,markers->markers[0].pose.orientation.z,markers->markers[0].pose.orientation.w);
-                        ROS_INFO("angle = %f",angle);
+                        ROS_INFO("angle = %f",yaw);
                         ROS_INFO("NS_Stable = %d",N_S_DataStable);
-                        if ((angle > last_data - 20 || angle < last_data + 20)){
+                        if ((yaw > last_data - 20 || yaw < last_data + 20)){
                             count1++;
                             //count 5 time to check the angle is stable
                             //ROS_INFO("angle = %f", angle);
                             if (count1 == 5){
                             //if the angle is stable find out the final result of NS after getting 5 identical result( N or S)
-                                if (angle >= 360 - angleMargin || angle <= 0 + angleMargin){
+                                if (yaw >= 360 - angleMargin || yaw <= 0 + angleMargin){
                                     strBufferMarker << 0;
                                     N_S_Result.data = strBufferMarker.str();
                                     ROS_INFO("%d", N_S_Result.data[0]);
                                     // ROS_INFO("Heading to North");
                                 }
 
-                                else if (angle >= 180 - angleMargin && angle <= 180 + angleMargin){
+                                else if (yaw >= 180 - angleMargin && yaw <= 180 + angleMargin){
                                     strBufferMarker << 1;
                                     N_S_Result.data = strBufferMarker.str();
                                     ROS_INFO("%d", N_S_Result.data[0]);
@@ -233,12 +231,9 @@ public:
                             //count3++;
                         //if (count3 == 5)
                             //count3 = 0;
-              }
+            //   }
                     
-                }
-            }       
-                
-            }
+                }     
 
         }
 
@@ -365,10 +360,6 @@ public:
 
     void Publish()
     {
-        // if (CupCplt == 1 && MarkerCplt == 1)
-        //     // if (MarkerCplt == 1)
-        //     {
-        // ROS_INFO("FUCK Brian");
         std::stringstream strForAssemble;
         strForAssemble << strBufferCup.str() << strBufferMarker.str();
         // strForAssemble << strBufferMarker.str();
@@ -419,13 +410,8 @@ int main(int argc, char **argv)
 
     while(ros::ok())
     {
-         if(camera.machineState == 1){
-            //camera.now_time = ros::Time::now();
-        }
         ros::spinOnce();
     }
     
-    // ros::Timer timer = camera.n.createTimer(ros::Duration(1.0), boost::bind(Camera::transformPoint, boost::ref(listener)));
-
     return 0;
 }
