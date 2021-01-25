@@ -8,8 +8,9 @@
 #include "std_msgs/Int32.h"
 
 #include <iostream>
+#include <vector>
 using namespace std;
-static const std::string OPENCV_WINDOW = "Image window";
+// static const std::string OPENCV_WINDOW = "Image window";
 
 
 
@@ -25,6 +26,8 @@ public:
   std_msgs::String str;
   int xPosition;
   int yPosition;
+  int width;
+  int height;
   int CupDistance;
   int machineState; 
   double green_lowH;
@@ -39,34 +42,95 @@ public:
   double red_highH;
   double red_highS;
   double red_highV;
-  int startCommand;
+  int Cupdetected;
   int circleSize;
+  int checkFinished;
   ImageConverter()
-      : it_(nh_)
-  {
+      : it_(nh_){
     // Subscrive to input video feed and publish output video feed
-    image_sub_ = it_.subscribe("camera/color/image_raw", 1,
-                               &ImageConverter::imageCb, this);
+    // image_sub_ = it_.subscribe("camera/color/image_raw", 1, &ImageConverter::imageCb, this);
+    image_sub_ = it_.subscribe("image_raw", 1, &ImageConverter::imageCb, this);
     image_pub_ = it_.advertise("/image_converter/output_video", 1);
-
-    cv::namedWindow(OPENCV_WINDOW);
+    width = 640;
+    nh_.getParam("width",width);
+    nh_.getParam("height",height);
+    xPosition = 0;
+    yPosition = 0;
+    checkFinished = 0;
+    // cv::namedWindow(OPENCV_WINDOW);
   }
 
   ~ImageConverter()
   {
-    cv::destroyWindow(OPENCV_WINDOW);
+    // cv::destroyWindow(OPENCV_WINDOW);
+  }
+  int checkRow(int posRow ,int posCol,int circle,cv_bridge::CvImagePtr final){
+    int whiteCount = 0;
+    int blackCount = 0;
+    for(int now = posRow; now < posRow + circle ; now +=2)
+      if(now > 0 && now < height){
+        vector<int> tmp;
+        tmp = final->image.row(now).col(posCol);
+        if(tmp[0] == 255)
+          whiteCount ++;
+        else
+          blackCount ++;
+      }
+    if(whiteCount >= blackCount)
+      return 1;
+    return 0;  
   }
 
-  void imageCb(const sensor_msgs::ImageConstPtr &msg)
-  {
+  int checkCol(int posRow ,int posCol,int circle,cv_bridge::CvImagePtr final){
+    int whiteCount = 0;
+        int blackCount = 0;
+        for(int now = posCol; now < posCol + circle ; now +=2)
+          if(now > 0 && now < width){
+            vector<int> tmp;
+            tmp = final->image.row(posRow).col(now);
+            if(tmp[0] == 255)
+              whiteCount ++;
+            else
+              blackCount ++; 
+          }
+        if(whiteCount >= blackCount)
+          return 1;
+        return 0;  
+  }
+
+  int checkCupPos(int circle ,cv_bridge::CvImagePtr final){
+    for(int row = 0; row < height; row += circle )
+      for(int col = 0; col < width; col += circle)
+        if(checkCol(row,col,circle,final) && checkRow(row,col,circle,final)){
+          xPosition = (col + circle / 2 + circle / 6) > width? col : col+circle / 2 + circle / 6;
+          yPosition = (row + circle / 2 + circle / 6) > height? row : row + circle / 2 + circle / 6;
+          return 1;
+        }
+    return 0;    
+  }
+
+  void findCupPosition(cv_bridge::CvImagePtr final){
+    
+    
+    
+    // if(checkFinished != 1)
+    checkFinished = checkCupPos(circleSize, final);
+    // cout << checkFinished <<endl;
+    cv::circle(final->image, cv::Point(xPosition, yPosition), circleSize, CV_RGB(255, 255, 255));
+    cv::imshow("Final Window",final->image);  
+  }
+
+  void imageCb(const sensor_msgs::ImageConstPtr &msg){
     cv_bridge::CvImagePtr cv_ptr;
     cv_bridge::CvImagePtr cv_ptr_green_;
     cv_bridge::CvImagePtr cv_ptr_red_;
+    cv_bridge::CvImagePtr cv_final;
     try
     {
       cv_ptr =  cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
       cv_ptr_green_ = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
       cv_ptr_red_ = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
+      cv_final = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
     //   cv_ptr2 = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
     }
     catch (cv_bridge::Exception &e)
@@ -89,37 +153,45 @@ public:
     nh_.getParam("/red_highS",red_highS);
     nh_.getParam("/red_highV",red_highV);
 
-    nh_.getParam("/xPose",xPosition);
-    nh_.getParam("/yPose",yPosition);
+    // nh_.getParam("/xPose",xPosition);
+    // nh_.getParam("/yPose",yPosition);
     nh_.getParam("/circleSize",circleSize);
-    cv::circle(cv_ptr->image, cv::Point(xPosition, yPosition), circleSize, CV_RGB(0, 255, 0));
+    // cv::circle(cv_ptr->image, cv::Point(xPosition, yPosition), circleSize, CV_RGB(0, 255, 0));
     cv::cvtColor(cv_ptr->image,cv_ptr_green_->image,cv::COLOR_BGR2HSV);
     cv::cvtColor(cv_ptr->image,cv_ptr_red_->image,cv::COLOR_BGR2HSV);
     // Update GUI Window
-    cout<<cv_ptr_green_->image.col(xPosition).row(yPosition)<<endl;
-    cout<<"green_lowH , "<<green_lowH<<", green_lowS , "<<green_lowS<<", green_lowV , "<<green_lowV<<endl;
-    cout<<"green_highH , "<<green_highH<<", green_highS , "<<green_highS<<", green_highV , "<<green_highV<<endl;
+    // cout<<cv_ptr_green_->image.col(xPosition).row(yPosition)<<endl;
+    // cout<<"green_lowH , "<<green_lowH<<", green_lowS , "<<green_lowS<<", green_lowV , "<<green_lowV<<endl;
+    // cout<<"green_highH , "<<green_highH<<", green_highS , "<<green_highS<<", green_highV , "<<green_highV<<endl;
 
-    cout<<cv_ptr_red_->image.col(xPosition).row(yPosition)<<endl;
-    cout<<"red_lowH , "<<red_lowH<<", red_lowS , "<<red_lowS<<", red_lowV , "<<red_lowV<<endl;
-    cout<<"red_highH , "<<red_highH<<", red_highS , "<<red_highS<<", red_highV , "<<red_highV<<endl;
+    // cout<<cv_ptr_red_->image.col(xPosition).row(yPosition)<<endl;
+    // cout<<"red_lowH , "<<red_lowH<<", red_lowS , "<<red_lowS<<", red_lowV , "<<red_lowV<<endl;
+    // cout<<"red_highH , "<<red_highH<<", red_highS , "<<red_highS<<", red_highV , "<<red_highV<<endl;
     // cv::imshow(OPENCV_WINDOW, cv_ptr->image);
     cv::inRange(cv_ptr_green_->image,cv::Scalar(green_lowH,green_lowS,green_lowV),cv::Scalar(green_highH,green_highS,green_highV),cv_ptr_green_->image);
     cv::inRange(cv_ptr_red_->image,cv::Scalar(red_lowH,red_lowS,red_lowV),cv::Scalar(red_highH,red_highS,red_highV),cv_ptr_red_->image);
     
-    cv::imshow("Red inverted Window",cv_ptr_red_->image);
+    // cv::imshow("Red inverted Window",cv_ptr_red_->image);
 
     cv::threshold(cv_ptr_red_->image,cv_ptr_red_->image,200,255,1);
     // cout<<cv_ptr2->image.col(xPosition).row(yPosition)<<endl;
 
     
-    cv::imshow(OPENCV_WINDOW,cv_ptr->image);
-    cv::imshow("Green Window",cv_ptr_green_->image);
-    cv::imshow("Red Window",cv_ptr_red_->image);
+    // cv::imshow(OPENCV_WINDOW,cv_ptr->image);
+    // cv::waitKey(3);
+    // cv::imshow("Green Window",cv_ptr_green_->image);
     cv::waitKey(3);
+    // cv::imshow("Red Window",cv_ptr_red_->image);
+    // cv::waitKey(3);
+    cv::addWeighted(cv_ptr_red_->image,1,cv_ptr_green_->image,1,0.0,cv_final->image);
 
+    // cv::imshow("Final Window",cv_final->image);
     // Output modified video stream
     // image_pub_.publish(cv_ptr->toImageMsg());
+    findCupPosition(cv_final);
+
+    cv::circle(cv_ptr->image, cv::Point(xPosition, yPosition), circleSize, CV_RGB(255, 255, 255));
+    cv::imshow("Window",cv_ptr->image);  
   }
 };
 

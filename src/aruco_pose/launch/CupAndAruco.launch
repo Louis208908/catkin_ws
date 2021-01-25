@@ -9,7 +9,7 @@
     <!-- detect aruco markers -->
     <node pkg="nodelet" clear_params="true" type="nodelet" name="aruco_detect" args="load aruco_pose/aruco_detect nodelet_manager">
         <remap from="image_raw" to="/camera/color/image_raw"/>
-                <remap from="camera_info" to="/camera/color/camera_info"/>
+        <remap from="camera_info" to="/camera/color/camera_info"/>
         <param name="length" value="0.7"/>
     </node>
 

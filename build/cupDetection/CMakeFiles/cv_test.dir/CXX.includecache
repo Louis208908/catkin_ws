@@ -25,6 +25,8 @@ std_msgs/Int32.h
 /home/louis/catkin_ws/src/cupDetection/src/std_msgs/Int32.h
 iostream
 -
+vector
+-
 
 /opt/ros/melodic/include/cv_bridge/cv_bridge.h
 sensor_msgs/Image.h

@@ -3,7 +3,9 @@
 
 <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
 
-<node name="QAQ" pkg="cupDetection" type="cv_test" output="screen"/>
+<node name="QAQ" pkg="cupDetection" type="cv_test" output="screen">
+    <remap from="image_raw" to="/camera/color/image_raw"/>
+</node>
 
 
 <!--  for green cup lowHSV = <60,160,0> HighHSV = <100,255,255>-->
@@ -17,14 +19,16 @@
 <param name="green_highV" type="double" value="255"/>
 
 
-<param name="red_lowH"  type="double" value="1"/>
+<param name="red_lowH"  type="double" value="0"/>
 <param name="red_lowS"  type="double" value="0"/>
 <param name="red_lowV"  type="double" value="0"/>
 <param name="red_highH" type="double" value="177"/>
 <param name="red_highS" type="double" value="255"/>
 <param name="red_highV" type="double" value="255"/>
-<param name="xPose" type="int" value="330"/>
-<param name="yPose" type="int" value="300"/>
+<!-- <param name="xPose" type="int" value="330"/>
+<param name="yPose" type="int" value="300"/> -->
+<param name="height" type="int" value="480"/>
+<param name="width" type="int" value="640"/>
 <param name="circleSize" type="int" value="60"/>
 
 </launch>
