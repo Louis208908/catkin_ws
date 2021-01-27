@@ -110,8 +110,8 @@ public:
   }
 
   int checkCupPos(int circle ,cv_bridge::CvImagePtr final){
-    for(int row = 0; row < height; row += circle )
-      for(int col = 0; col < width; col += circle)
+    for(int row = 0; row < height; row += 0.5 * circle )
+      for(int col = 0; col < width; col += 0.5 * circle)
         if(checkCol(row,col,circle,final) && checkRow(row,col,circle,final)){
           xPosition = col + 0.5 * circle ;
           yPosition = row  + 0.5 * circle;
@@ -136,8 +136,7 @@ public:
     cv_bridge::CvImagePtr cv_final;
     cv_bridge::CvImagePtr cv_ptr_white_;
     cv_bridge::CvImagePtr cv_ptr_black_;
-    try
-    {
+    try{
       cv_ptr =  cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
       cv_ptr_green_ = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
       cv_ptr_red_ = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
@@ -145,8 +144,7 @@ public:
       cv_ptr_white_ = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
       cv_ptr_black_ = cv_bridge::toCvCopy(msg, sensor_msgs::image_encodings::BGR8);
     }
-    catch (cv_bridge::Exception &e)
-    {
+    catch (cv_bridge::Exception &e){
       ROS_ERROR("cv_bridge exception: %s", e.what());
       return;
     }
@@ -200,7 +198,7 @@ public:
     // cout<<"red_highH , "<<red_highH<<", red_highS , "<<red_highS<<", red_highV , "<<red_highV<<endl;
     // cout<<"white_lowR , "<<white_lowR<<", white_lowG , "<<white_lowG<<", white_lowB , "<<white_lowB<<endl;
     // cout<<"white_highR , "<<white_highR<<", white_highG , "<<white_highG<<", white_highB , "<<white_highB<<endl;    
-    cv::imshow(OPENCV_WINDOW, cv_ptr->image);
+    // cv::imshow(OPENCV_WINDOW, cv_ptr->image);
     cv::waitKey(3);
     cv::inRange(cv_ptr_green_->image,cv::Scalar(green_lowH,green_lowS,green_lowV),cv::Scalar(green_highH,green_highS,green_highV),cv_ptr_green_->image);
     cv::inRange(cv_ptr_red_->image,cv::Scalar(red_lowH,red_lowS,red_lowV),cv::Scalar(red_highH,red_highS,red_highV),cv_ptr_red_->image);
@@ -227,6 +225,8 @@ public:
     // Output modified video stream
     // image_pub_.publish(cv_ptr->toImageMsg());
     findCupPosition(cv_final);
+    cv::circle(cv_ptr->image, cv::Point(xPosition, yPosition), circleSize, CV_RGB(255, 255, 255));
+    cv::imshow(OPENCV_WINDOW,cv_ptr->image);
   }
 };
 

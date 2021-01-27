@@ -141,28 +141,39 @@ public:
 
 
 
-    void AngleTransform(float x, float y, float z, float w){
+    void Que2RPY(float x, float y, float z, float w){
         roll = atan2(2 * (y * z + x * w), 1 - 2 * (x * x + y * y));
-        roll *= -1;
-        roll /= 3.1415926;
-        roll *= 180;
-        if(roll < 0)
-            roll += 360;
-
         pitch = asin( 2 * (w * y - x * z));
-        pitch *= -1;
-        pitch /= 3.1415926;
-        pitch *= 180;
-        if(pitch < 0 )
-            pitch += 360;
-        
         yaw = atan2(2 * (w * z + x * y), 1 - 2 * (z * z + y * y));
-        yaw *= -1;
-        yaw /= 3.1415926;
-        yaw *= 180;
-        if(yaw < 0)
-            yaw += 360;    
+        // roll *= -1;
+        // pitch *= -1;
+        // yaw *= -1;
+        // roll /= 3.1415926;
+        // roll *= 180;
+        // if(roll < 0)
+        //     roll += 360;
+        // pitch /= 3.1415926;
+        // pitch *= 180;
+        // if(pitch < 0 )
+        //     pitch += 360;        
+        // yaw /= 3.1415926;
+        // yaw *= 180;
+        // if(yaw < 0)
+        //     yaw += 360;    
         printf("roll = %f, pitch =  %f,yaw =  %f",roll,pitch,yaw);    
+    }
+
+    void RPY2Que(float Roll , float Pitch, float Yaw){
+        float x,y,z,w;
+        float R,P,Y;
+        R = 0.5 * Roll;
+        P = 0.5 * Pitch;
+        Y = 0.5 * Yaw;
+        w = cos(R)*cos(P)*cos(Y) + sin(R)*sin(P)*sin(Y);
+        x = sin(R)*cos(P)*cos(Y) - cos(R)*sin(P)*sin(Y);
+        y = cos(R)*sin(P)*cos(Y) + sin(R)*cos(P)*sin(Y);
+        z = cos(R)*cos(P)*sin(Y) - sin(R)*sin(P)*sin(Y);
+        printf("Queternion x = %d, y = %d, z = %d, w = %d",x,y,z,w);
     }
 
     void markersCallback(const aruco_pose::MarkerArray::ConstPtr &markers)
@@ -178,7 +189,7 @@ public:
                         last_data2 = pitch;
                         last_data2 = roll;
                         // ROS_INFO("id:%ld",markers->markers[0].id );
-                        AngleTransform(markers->markers[0].pose.orientation.x,markers->markers[0].pose.orientation.y,markers->markers[0].pose.orientation.z,markers->markers[0].pose.orientation.w);
+                        Que2RPY(markers->markers[0].pose.orientation.x,markers->markers[0].pose.orientation.y,markers->markers[0].pose.orientation.z,markers->markers[0].pose.orientation.w);
                         ROS_INFO("angle = %f",yaw);
                         ROS_INFO("NS_Stable = %d",N_S_DataStable);
                         if ((yaw > last_data - 20 || yaw < last_data + 20)){
