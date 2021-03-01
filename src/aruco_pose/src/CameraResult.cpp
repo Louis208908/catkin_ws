@@ -173,7 +173,7 @@ public:
         x = sin(R)*cos(P)*cos(Y) - cos(R)*sin(P)*sin(Y);
         y = cos(R)*sin(P)*cos(Y) + sin(R)*cos(P)*sin(Y);
         z = cos(R)*cos(P)*sin(Y) - sin(R)*sin(P)*sin(Y);
-        printf("Queternion x = %d, y = %d, z = %d, w = %d",x,y,z,w);
+        printf("Queternion x = %f, y = %f, z = %f, w = %f\n",x,y,z,w);
     }
 
     void markersCallback(const aruco_pose::MarkerArray::ConstPtr &markers)

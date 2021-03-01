@@ -28,7 +28,7 @@ public:
       : it_(nh_)
   {
     // Subscrive to input video feed and publish output video feed
-    image_sub_ = it_.subscribe("camera/color/image_raw", 1,
+    image_sub_ = it_.subscribe("image_raw", 1,
                                &ImageConverter::imageCb, this);
     image_pub_ = it_.advertise("/image_converter/output_video", 1);
     // nh_.getParam("/XPose",xPosition);
@@ -59,15 +59,16 @@ public:
     
     
       std::stringstream strstr;
-      int width = 10;
-      int height = 70;
+      int width = 1280;
+      int height = 720;
       // int xPosition = 604 - 3;
-      nh_.getParam("cupDetectWithFunction/XPose", xPosition);
-	
+      nh_.getParam("XPose", xPosition);
+	      // nh_.getParam("cupDetectWithFunction/XPose", xPosition);
+// 
       
-      nh_.getParam("cupDetectWithFunction/YPose", yPosition);
+      nh_.getParam("YPose", yPosition);
       
-      nh_.getParam("cupDetectWithFunction/cupDistance",CupDistance);
+      nh_.getParam("cupDistance",CupDistance);
        //ROS_INFO("%d", xPosition);
        //ROS_INFO("%d", yPosition);
       // int yPosition = 462;
