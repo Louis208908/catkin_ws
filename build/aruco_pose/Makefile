@@ -101,17 +101,6 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
-# Special rule for the target test
-test:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
-	/usr/bin/ctest --force-new-ctest-process $(ARGS)
-.PHONY : test
-
-# Special rule for the target test
-test/fast: test
-
-.PHONY : test/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -122,6 +111,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
 
 # Special rule for the target install
 install: preinstall
@@ -468,36 +468,6 @@ CameraResult/fast:
 .PHONY : CameraResult/fast
 
 # Convenience name for target.
-aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/rule:
-	cd /home/louis/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/rule
-.PHONY : aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/rule
-
-# Convenience name for target.
-CameraResultWithoutMachineStatus: aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/rule
-
-.PHONY : CameraResultWithoutMachineStatus
-
-# fast build rule for target.
-CameraResultWithoutMachineStatus/fast:
-	cd /home/louis/catkin_ws/build && $(MAKE) -f aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/build.make aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/build
-.PHONY : CameraResultWithoutMachineStatus/fast
-
-# Convenience name for target.
-aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/rule:
-	cd /home/louis/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/rule
-.PHONY : aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/rule
-
-# Convenience name for target.
-clean_test_results_aruco_pose: aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/rule
-
-.PHONY : clean_test_results_aruco_pose
-
-# fast build rule for target.
-clean_test_results_aruco_pose/fast:
-	cd /home/louis/catkin_ws/build && $(MAKE) -f aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/build.make aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/build
-.PHONY : clean_test_results_aruco_pose/fast
-
-# Convenience name for target.
 aruco_pose/CMakeFiles/_aruco_pose_generate_messages_check_deps_cup.dir/rule:
 	cd /home/louis/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_pose/CMakeFiles/_aruco_pose_generate_messages_check_deps_cup.dir/rule
 .PHONY : aruco_pose/CMakeFiles/_aruco_pose_generate_messages_check_deps_cup.dir/rule
@@ -633,6 +603,21 @@ run_tests_aruco_pose_rostest_test_largemap.test/fast:
 .PHONY : run_tests_aruco_pose_rostest_test_largemap.test/fast
 
 # Convenience name for target.
+aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/rule:
+	cd /home/louis/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/rule
+.PHONY : aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/rule
+
+# Convenience name for target.
+clean_test_results_aruco_pose: aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/rule
+
+.PHONY : clean_test_results_aruco_pose
+
+# fast build rule for target.
+clean_test_results_aruco_pose/fast:
+	cd /home/louis/catkin_ws/build && $(MAKE) -f aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/build.make aruco_pose/CMakeFiles/clean_test_results_aruco_pose.dir/build
+.PHONY : clean_test_results_aruco_pose/fast
+
+# Convenience name for target.
 aruco_pose/CMakeFiles/run_tests_aruco_pose_rostest_test_test_parser_pass.test.dir/rule:
 	cd /home/louis/catkin_ws/build && $(MAKE) -f CMakeFiles/Makefile2 aruco_pose/CMakeFiles/run_tests_aruco_pose_rostest_test_test_parser_pass.test.dir/rule
 .PHONY : aruco_pose/CMakeFiles/run_tests_aruco_pose_rostest_test_test_parser_pass.test.dir/rule
@@ -733,33 +718,6 @@ src/CameraResult.s: src/CameraResult.cpp.s
 src/CameraResult.cpp.s:
 	cd /home/louis/catkin_ws/build && $(MAKE) -f aruco_pose/CMakeFiles/CameraResult.dir/build.make aruco_pose/CMakeFiles/CameraResult.dir/src/CameraResult.cpp.s
 .PHONY : src/CameraResult.cpp.s
-
-src/CameraResultWithoutMachineStatus.o: src/CameraResultWithoutMachineStatus.cpp.o
-
-.PHONY : src/CameraResultWithoutMachineStatus.o
-
-# target to build an object file
-src/CameraResultWithoutMachineStatus.cpp.o:
-	cd /home/louis/catkin_ws/build && $(MAKE) -f aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/build.make aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/src/CameraResultWithoutMachineStatus.cpp.o
-.PHONY : src/CameraResultWithoutMachineStatus.cpp.o
-
-src/CameraResultWithoutMachineStatus.i: src/CameraResultWithoutMachineStatus.cpp.i
-
-.PHONY : src/CameraResultWithoutMachineStatus.i
-
-# target to preprocess a source file
-src/CameraResultWithoutMachineStatus.cpp.i:
-	cd /home/louis/catkin_ws/build && $(MAKE) -f aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/build.make aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/src/CameraResultWithoutMachineStatus.cpp.i
-.PHONY : src/CameraResultWithoutMachineStatus.cpp.i
-
-src/CameraResultWithoutMachineStatus.s: src/CameraResultWithoutMachineStatus.cpp.s
-
-.PHONY : src/CameraResultWithoutMachineStatus.s
-
-# target to generate assembly for a file
-src/CameraResultWithoutMachineStatus.cpp.s:
-	cd /home/louis/catkin_ws/build && $(MAKE) -f aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/build.make aruco_pose/CMakeFiles/CameraResultWithoutMachineStatus.dir/src/CameraResultWithoutMachineStatus.cpp.s
-.PHONY : src/CameraResultWithoutMachineStatus.cpp.s
 
 src/aruco_detect.o: src/aruco_detect.cpp.o
 
@@ -960,7 +918,6 @@ help:
 	@echo "... install/local"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... test"
 	@echo "... aruco_pose_generate_messages_py"
 	@echo "... aruco_pose_gennodejs"
 	@echo "... _aruco_pose_generate_messages_check_deps_Point2D"
@@ -977,14 +934,13 @@ help:
 	@echo "... aruco_pose_generate_messages_nodejs"
 	@echo "... aruco_pose_generate_messages_lisp"
 	@echo "... _aruco_pose_generate_messages_check_deps_MarkerArray"
+	@echo "... test"
 	@echo "... _run_tests_aruco_pose_rostest_test_test_parser_empty_map.test"
 	@echo "... aruco_pose_genpy"
 	@echo "... aruco_pose_gencfg"
 	@echo "... run_tests_aruco_pose_rostest_test_test_parser_empty_map.test"
 	@echo "... install"
 	@echo "... CameraResult"
-	@echo "... CameraResultWithoutMachineStatus"
-	@echo "... clean_test_results_aruco_pose"
 	@echo "... _aruco_pose_generate_messages_check_deps_cup"
 	@echo "... _opencv_aruco"
 	@echo "... aruco_pose"
@@ -994,6 +950,7 @@ help:
 	@echo "... run_tests_aruco_pose_rostest_test_basic.test"
 	@echo "... run_tests_aruco_pose_rostest"
 	@echo "... run_tests_aruco_pose_rostest_test_largemap.test"
+	@echo "... clean_test_results_aruco_pose"
 	@echo "... run_tests_aruco_pose_rostest_test_test_parser_pass.test"
 	@echo "... run_tests_aruco_pose_rostest_test_test_node_failure.test"
 	@echo "... _run_tests_aruco_pose_rostest_test_basic.test"
@@ -1002,9 +959,6 @@ help:
 	@echo "... src/CameraResult.o"
 	@echo "... src/CameraResult.i"
 	@echo "... src/CameraResult.s"
-	@echo "... src/CameraResultWithoutMachineStatus.o"
-	@echo "... src/CameraResultWithoutMachineStatus.i"
-	@echo "... src/CameraResultWithoutMachineStatus.s"
 	@echo "... src/aruco_detect.o"
 	@echo "... src/aruco_detect.i"
 	@echo "... src/aruco_detect.s"

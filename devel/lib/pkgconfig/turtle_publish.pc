@@ -1,0 +1,8 @@
+prefix=/home/louis/catkin_ws/devel
+
+Name: turtle_publish
+Description: Description of turtle_publish
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

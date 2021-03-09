@@ -152,9 +152,9 @@ include_directories(
 add_executable(CameraResult src/CameraResult.cpp)
 target_link_libraries(CameraResult ${catkin_LIBRARIES})
 add_dependencies(CameraResult aruco_pose_gencpp)
-add_executable(CameraResultWithoutMachineStatus src/CameraResultWithoutMachineStatus.cpp)
-target_link_libraries(CameraResultWithoutMachineStatus ${catkin_LIBRARIES})
-add_dependencies(CameraResultWithoutMachineStatus aruco_pose_gencpp)
+# add_executable(CameraResultWithoutMachineStatus src/CameraResultWithoutMachineStatus.cpp)
+# target_link_libraries(CameraResultWithoutMachineStatus ${catkin_LIBRARIES})
+# add_dependencies(CameraResultWithoutMachineStatus aruco_pose_gencpp)
 
 
 

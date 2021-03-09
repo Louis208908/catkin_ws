@@ -24,17 +24,17 @@ struct nsRequest_
   typedef nsRequest_<ContainerAllocator> Type;
 
   nsRequest_()
-    : OAO(0)  {
+    : ask_ns(0)  {
     }
   nsRequest_(const ContainerAllocator& _alloc)
-    : OAO(0)  {
+    : ask_ns(0)  {
   (void)_alloc;
     }
 
 
 
-   typedef int32_t _OAO_type;
-  _OAO_type OAO;
+   typedef int32_t _ask_ns_type;
+  _ask_ns_type ask_ns;
 
 
 
@@ -65,7 +65,7 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::aruco_pose::nsRequest_<ContainerAllocator1> & lhs, const ::aruco_pose::nsRequest_<ContainerAllocator2> & rhs)
 {
-  return lhs.OAO == rhs.OAO;
+  return lhs.ask_ns == rhs.ask_ns;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -122,12 +122,12 @@ struct MD5Sum< ::aruco_pose::nsRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "4a26ed29ee2d854e1ac3e22595442f5e";
+    return "a6b1691ab5ec180f4125d5a3869ba886";
   }
 
   static const char* value(const ::aruco_pose::nsRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x4a26ed29ee2d854eULL;
-  static const uint64_t static_value2 = 0x1ac3e22595442f5eULL;
+  static const uint64_t static_value1 = 0xa6b1691ab5ec180fULL;
+  static const uint64_t static_value2 = 0x4125d5a3869ba886ULL;
 };
 
 template<class ContainerAllocator>
@@ -146,7 +146,7 @@ struct Definition< ::aruco_pose::nsRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "int32 OAO\n"
+    return "int32 ask_ns\n"
 ;
   }
 
@@ -165,7 +165,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.OAO);
+      stream.next(m.ask_ns);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -184,8 +184,8 @@ struct Printer< ::aruco_pose::nsRequest_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::aruco_pose::nsRequest_<ContainerAllocator>& v)
   {
-    s << indent << "OAO: ";
-    Printer<int32_t>::stream(s, indent + "  ", v.OAO);
+    s << indent << "ask_ns: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.ask_ns);
   }
 };
 

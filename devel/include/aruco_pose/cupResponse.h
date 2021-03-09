@@ -24,17 +24,17 @@ struct cupResponse_
   typedef cupResponse_<ContainerAllocator> Type;
 
   cupResponse_()
-    : CupResult()  {
+    : cup_result()  {
     }
   cupResponse_(const ContainerAllocator& _alloc)
-    : CupResult(_alloc)  {
+    : cup_result(_alloc)  {
   (void)_alloc;
     }
 
 
 
-   typedef std::vector<int32_t, typename ContainerAllocator::template rebind<int32_t>::other >  _CupResult_type;
-  _CupResult_type CupResult;
+   typedef std::vector<int32_t, typename ContainerAllocator::template rebind<int32_t>::other >  _cup_result_type;
+  _cup_result_type cup_result;
 
 
 
@@ -65,7 +65,7 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::aruco_pose::cupResponse_<ContainerAllocator1> & lhs, const ::aruco_pose::cupResponse_<ContainerAllocator2> & rhs)
 {
-  return lhs.CupResult == rhs.CupResult;
+  return lhs.cup_result == rhs.cup_result;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -122,12 +122,12 @@ struct MD5Sum< ::aruco_pose::cupResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "f022abcdee8d409cf204cd68d1527534";
+    return "f032d9fb8f53b20dbf71031171aac863";
   }
 
   static const char* value(const ::aruco_pose::cupResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xf022abcdee8d409cULL;
-  static const uint64_t static_value2 = 0xf204cd68d1527534ULL;
+  static const uint64_t static_value1 = 0xf032d9fb8f53b20dULL;
+  static const uint64_t static_value2 = 0xbf71031171aac863ULL;
 };
 
 template<class ContainerAllocator>
@@ -146,7 +146,8 @@ struct Definition< ::aruco_pose::cupResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "int32[] CupResult\n"
+    return "int32[] cup_result\n"
+"\n"
 ;
   }
 
@@ -165,7 +166,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.CupResult);
+      stream.next(m.cup_result);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -184,11 +185,11 @@ struct Printer< ::aruco_pose::cupResponse_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::aruco_pose::cupResponse_<ContainerAllocator>& v)
   {
-    s << indent << "CupResult[]" << std::endl;
-    for (size_t i = 0; i < v.CupResult.size(); ++i)
+    s << indent << "cup_result[]" << std::endl;
+    for (size_t i = 0; i < v.cup_result.size(); ++i)
     {
-      s << indent << "  CupResult[" << i << "]: ";
-      Printer<int32_t>::stream(s, indent + "  ", v.CupResult[i]);
+      s << indent << "  cup_result[" << i << "]: ";
+      Printer<int32_t>::stream(s, indent + "  ", v.cup_result[i]);
     }
   }
 };

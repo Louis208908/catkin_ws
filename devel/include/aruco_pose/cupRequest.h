@@ -24,17 +24,17 @@ struct cupRequest_
   typedef cupRequest_<ContainerAllocator> Type;
 
   cupRequest_()
-    : OUO(0)  {
+    : ask_cup(0)  {
     }
   cupRequest_(const ContainerAllocator& _alloc)
-    : OUO(0)  {
+    : ask_cup(0)  {
   (void)_alloc;
     }
 
 
 
-   typedef int32_t _OUO_type;
-  _OUO_type OUO;
+   typedef int32_t _ask_cup_type;
+  _ask_cup_type ask_cup;
 
 
 
@@ -65,7 +65,7 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::aruco_pose::cupRequest_<ContainerAllocator1> & lhs, const ::aruco_pose::cupRequest_<ContainerAllocator2> & rhs)
 {
-  return lhs.OUO == rhs.OUO;
+  return lhs.ask_cup == rhs.ask_cup;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -122,12 +122,12 @@ struct MD5Sum< ::aruco_pose::cupRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "e03e9f73d1355bf38f3e731f90a1fc9e";
+    return "25ae256185f7a2b5556316fe4144f4f8";
   }
 
   static const char* value(const ::aruco_pose::cupRequest_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0xe03e9f73d1355bf3ULL;
-  static const uint64_t static_value2 = 0x8f3e731f90a1fc9eULL;
+  static const uint64_t static_value1 = 0x25ae256185f7a2b5ULL;
+  static const uint64_t static_value2 = 0x556316fe4144f4f8ULL;
 };
 
 template<class ContainerAllocator>
@@ -146,7 +146,7 @@ struct Definition< ::aruco_pose::cupRequest_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "int32 OUO\n"
+    return "int32 ask_cup\n"
 ;
   }
 
@@ -165,7 +165,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.OUO);
+      stream.next(m.ask_cup);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -184,8 +184,8 @@ struct Printer< ::aruco_pose::cupRequest_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::aruco_pose::cupRequest_<ContainerAllocator>& v)
   {
-    s << indent << "OUO: ";
-    Printer<int32_t>::stream(s, indent + "  ", v.OUO);
+    s << indent << "ask_cup: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.ask_cup);
   }
 };
 

@@ -24,17 +24,17 @@ struct nsResponse_
   typedef nsResponse_<ContainerAllocator> Type;
 
   nsResponse_()
-    : ns(0)  {
+    : ns_result(0)  {
     }
   nsResponse_(const ContainerAllocator& _alloc)
-    : ns(0)  {
+    : ns_result(0)  {
   (void)_alloc;
     }
 
 
 
-   typedef int32_t _ns_type;
-  _ns_type ns;
+   typedef int32_t _ns_result_type;
+  _ns_result_type ns_result;
 
 
 
@@ -65,7 +65,7 @@ return s;
 template<typename ContainerAllocator1, typename ContainerAllocator2>
 bool operator==(const ::aruco_pose::nsResponse_<ContainerAllocator1> & lhs, const ::aruco_pose::nsResponse_<ContainerAllocator2> & rhs)
 {
-  return lhs.ns == rhs.ns;
+  return lhs.ns_result == rhs.ns_result;
 }
 
 template<typename ContainerAllocator1, typename ContainerAllocator2>
@@ -122,12 +122,12 @@ struct MD5Sum< ::aruco_pose::nsResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "414ec99616e67a0447cefa81e0ded80a";
+    return "e2ad2f67474bb9a8e84b2525b4dadf8c";
   }
 
   static const char* value(const ::aruco_pose::nsResponse_<ContainerAllocator>&) { return value(); }
-  static const uint64_t static_value1 = 0x414ec99616e67a04ULL;
-  static const uint64_t static_value2 = 0x47cefa81e0ded80aULL;
+  static const uint64_t static_value1 = 0xe2ad2f67474bb9a8ULL;
+  static const uint64_t static_value2 = 0xe84b2525b4dadf8cULL;
 };
 
 template<class ContainerAllocator>
@@ -146,7 +146,8 @@ struct Definition< ::aruco_pose::nsResponse_<ContainerAllocator> >
 {
   static const char* value()
   {
-    return "int32 ns\n"
+    return "int32 ns_result\n"
+"\n"
 ;
   }
 
@@ -165,7 +166,7 @@ namespace serialization
   {
     template<typename Stream, typename T> inline static void allInOne(Stream& stream, T m)
     {
-      stream.next(m.ns);
+      stream.next(m.ns_result);
     }
 
     ROS_DECLARE_ALLINONE_SERIALIZER
@@ -184,8 +185,8 @@ struct Printer< ::aruco_pose::nsResponse_<ContainerAllocator> >
 {
   template<typename Stream> static void stream(Stream& s, const std::string& indent, const ::aruco_pose::nsResponse_<ContainerAllocator>& v)
   {
-    s << indent << "ns: ";
-    Printer<int32_t>::stream(s, indent + "  ", v.ns);
+    s << indent << "ns_result: ";
+    Printer<int32_t>::stream(s, indent + "  ", v.ns_result);
   }
 };
 

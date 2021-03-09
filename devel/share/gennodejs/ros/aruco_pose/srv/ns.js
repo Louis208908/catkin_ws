@@ -21,22 +21,22 @@ class nsRequest {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.OAO = null;
+      this.ask_ns = null;
     }
     else {
-      if (initObj.hasOwnProperty('OAO')) {
-        this.OAO = initObj.OAO
+      if (initObj.hasOwnProperty('ask_ns')) {
+        this.ask_ns = initObj.ask_ns
       }
       else {
-        this.OAO = 0;
+        this.ask_ns = 0;
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type nsRequest
-    // Serialize message field [OAO]
-    bufferOffset = _serializer.int32(obj.OAO, buffer, bufferOffset);
+    // Serialize message field [ask_ns]
+    bufferOffset = _serializer.int32(obj.ask_ns, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -44,8 +44,8 @@ class nsRequest {
     //deserializes a message object of type nsRequest
     let len;
     let data = new nsRequest(null);
-    // Deserialize message field [OAO]
-    data.OAO = _deserializer.int32(buffer, bufferOffset);
+    // Deserialize message field [ask_ns]
+    data.ask_ns = _deserializer.int32(buffer, bufferOffset);
     return data;
   }
 
@@ -60,13 +60,13 @@ class nsRequest {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '4a26ed29ee2d854e1ac3e22595442f5e';
+    return 'a6b1691ab5ec180f4125d5a3869ba886';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    int32 OAO
+    int32 ask_ns
     
     `;
   }
@@ -77,11 +77,11 @@ class nsRequest {
       msg = {};
     }
     const resolved = new nsRequest(null);
-    if (msg.OAO !== undefined) {
-      resolved.OAO = msg.OAO;
+    if (msg.ask_ns !== undefined) {
+      resolved.ask_ns = msg.ask_ns;
     }
     else {
-      resolved.OAO = 0
+      resolved.ask_ns = 0
     }
 
     return resolved;
@@ -92,22 +92,22 @@ class nsResponse {
   constructor(initObj={}) {
     if (initObj === null) {
       // initObj === null is a special case for deserialization where we don't initialize fields
-      this.ns = null;
+      this.ns_result = null;
     }
     else {
-      if (initObj.hasOwnProperty('ns')) {
-        this.ns = initObj.ns
+      if (initObj.hasOwnProperty('ns_result')) {
+        this.ns_result = initObj.ns_result
       }
       else {
-        this.ns = 0;
+        this.ns_result = 0;
       }
     }
   }
 
   static serialize(obj, buffer, bufferOffset) {
     // Serializes a message object of type nsResponse
-    // Serialize message field [ns]
-    bufferOffset = _serializer.int32(obj.ns, buffer, bufferOffset);
+    // Serialize message field [ns_result]
+    bufferOffset = _serializer.int32(obj.ns_result, buffer, bufferOffset);
     return bufferOffset;
   }
 
@@ -115,8 +115,8 @@ class nsResponse {
     //deserializes a message object of type nsResponse
     let len;
     let data = new nsResponse(null);
-    // Deserialize message field [ns]
-    data.ns = _deserializer.int32(buffer, bufferOffset);
+    // Deserialize message field [ns_result]
+    data.ns_result = _deserializer.int32(buffer, bufferOffset);
     return data;
   }
 
@@ -131,13 +131,14 @@ class nsResponse {
 
   static md5sum() {
     //Returns md5sum for a message object
-    return '414ec99616e67a0447cefa81e0ded80a';
+    return 'e2ad2f67474bb9a8e84b2525b4dadf8c';
   }
 
   static messageDefinition() {
     // Returns full string definition for message
     return `
-    int32 ns
+    int32 ns_result
+    
     
     `;
   }
@@ -148,11 +149,11 @@ class nsResponse {
       msg = {};
     }
     const resolved = new nsResponse(null);
-    if (msg.ns !== undefined) {
-      resolved.ns = msg.ns;
+    if (msg.ns_result !== undefined) {
+      resolved.ns_result = msg.ns_result;
     }
     else {
-      resolved.ns = 0
+      resolved.ns_result = 0
     }
 
     return resolved;
@@ -162,6 +163,6 @@ class nsResponse {
 module.exports = {
   Request: nsRequest,
   Response: nsResponse,
-  md5sum() { return '8776fa0eb36ce3f8ec3b065ea8aaf653'; },
+  md5sum() { return '6db1d56b21aeaaf74af61c1e66674fb6'; },
   datatype() { return 'aruco_pose/ns'; }
 };

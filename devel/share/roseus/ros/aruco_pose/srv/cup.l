@@ -20,81 +20,81 @@
 
 (defclass aruco_pose::cupRequest
   :super ros::object
-  :slots (_OUO ))
+  :slots (_ask_cup ))
 
 (defmethod aruco_pose::cupRequest
   (:init
    (&key
-    ((:OUO __OUO) 0)
+    ((:ask_cup __ask_cup) 0)
     )
    (send-super :init)
-   (setq _OUO (round __OUO))
+   (setq _ask_cup (round __ask_cup))
    self)
-  (:OUO
-   (&optional __OUO)
-   (if __OUO (setq _OUO __OUO)) _OUO)
+  (:ask_cup
+   (&optional __ask_cup)
+   (if __ask_cup (setq _ask_cup __ask_cup)) _ask_cup)
   (:serialization-length
    ()
    (+
-    ;; int32 _OUO
+    ;; int32 _ask_cup
     4
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; int32 _OUO
-       (write-long _OUO s)
+     ;; int32 _ask_cup
+       (write-long _ask_cup s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; int32 _OUO
-     (setq _OUO (sys::peek buf ptr- :integer)) (incf ptr- 4)
+   ;; int32 _ask_cup
+     (setq _ask_cup (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;;
    self)
   )
 
 (defclass aruco_pose::cupResponse
   :super ros::object
-  :slots (_CupResult ))
+  :slots (_cup_result ))
 
 (defmethod aruco_pose::cupResponse
   (:init
    (&key
-    ((:CupResult __CupResult) (make-array 0 :initial-element 0 :element-type :integer))
+    ((:cup_result __cup_result) (make-array 0 :initial-element 0 :element-type :integer))
     )
    (send-super :init)
-   (setq _CupResult __CupResult)
+   (setq _cup_result __cup_result)
    self)
-  (:CupResult
-   (&optional __CupResult)
-   (if __CupResult (setq _CupResult __CupResult)) _CupResult)
+  (:cup_result
+   (&optional __cup_result)
+   (if __cup_result (setq _cup_result __cup_result)) _cup_result)
   (:serialization-length
    ()
    (+
-    ;; int32[] _CupResult
-    (* 4    (length _CupResult)) 4
+    ;; int32[] _cup_result
+    (* 4    (length _cup_result)) 4
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; int32[] _CupResult
-     (write-long (length _CupResult) s)
-     (dotimes (i (length _CupResult))
-       (write-long (elt _CupResult i) s)
+     ;; int32[] _cup_result
+     (write-long (length _cup_result) s)
+     (dotimes (i (length _cup_result))
+       (write-long (elt _cup_result i) s)
        )
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; int32[] _CupResult
+   ;; int32[] _cup_result
    (let (n)
      (setq n (sys::peek buf ptr- :integer)) (incf ptr- 4)
-     (setq _CupResult (instantiate integer-vector n))
+     (setq _cup_result (instantiate integer-vector n))
      (dotimes (i n)
-     (setf (elt _CupResult i) (sys::peek buf ptr- :integer)) (incf ptr- 4)
+     (setf (elt _cup_result i) (sys::peek buf ptr- :integer)) (incf ptr- 4)
      ))
    ;;
    self)
@@ -104,7 +104,7 @@
   :super ros::object
   :slots ())
 
-(setf (get aruco_pose::cup :md5sum-) "82c828fe2774e236745aee3e2d245fe9")
+(setf (get aruco_pose::cup :md5sum-) "1ba64ca04594ee6db0df538fffb0ec78")
 (setf (get aruco_pose::cup :datatype-) "aruco_pose/cup")
 (setf (get aruco_pose::cup :request) aruco_pose::cupRequest)
 (setf (get aruco_pose::cup :response) aruco_pose::cupResponse)
@@ -112,24 +112,26 @@
 (defmethod aruco_pose::cupRequest
   (:response () (instance aruco_pose::cupResponse :init)))
 
-(setf (get aruco_pose::cupRequest :md5sum-) "82c828fe2774e236745aee3e2d245fe9")
+(setf (get aruco_pose::cupRequest :md5sum-) "1ba64ca04594ee6db0df538fffb0ec78")
 (setf (get aruco_pose::cupRequest :datatype-) "aruco_pose/cupRequest")
 (setf (get aruco_pose::cupRequest :definition-)
-      "int32 OUO
+      "int32 ask_cup
 ---
-int32[] CupResult
+int32[] cup_result
+
 ")
 
-(setf (get aruco_pose::cupResponse :md5sum-) "82c828fe2774e236745aee3e2d245fe9")
+(setf (get aruco_pose::cupResponse :md5sum-) "1ba64ca04594ee6db0df538fffb0ec78")
 (setf (get aruco_pose::cupResponse :datatype-) "aruco_pose/cupResponse")
 (setf (get aruco_pose::cupResponse :definition-)
-      "int32 OUO
+      "int32 ask_cup
 ---
-int32[] CupResult
+int32[] cup_result
+
 ")
 
 
 
-(provide :aruco_pose/cup "82c828fe2774e236745aee3e2d245fe9")
+(provide :aruco_pose/cup "1ba64ca04594ee6db0df538fffb0ec78")
 
 

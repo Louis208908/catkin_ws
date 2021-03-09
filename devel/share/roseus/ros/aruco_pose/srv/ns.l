@@ -20,74 +20,74 @@
 
 (defclass aruco_pose::nsRequest
   :super ros::object
-  :slots (_OAO ))
+  :slots (_ask_ns ))
 
 (defmethod aruco_pose::nsRequest
   (:init
    (&key
-    ((:OAO __OAO) 0)
+    ((:ask_ns __ask_ns) 0)
     )
    (send-super :init)
-   (setq _OAO (round __OAO))
+   (setq _ask_ns (round __ask_ns))
    self)
-  (:OAO
-   (&optional __OAO)
-   (if __OAO (setq _OAO __OAO)) _OAO)
+  (:ask_ns
+   (&optional __ask_ns)
+   (if __ask_ns (setq _ask_ns __ask_ns)) _ask_ns)
   (:serialization-length
    ()
    (+
-    ;; int32 _OAO
+    ;; int32 _ask_ns
     4
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; int32 _OAO
-       (write-long _OAO s)
+     ;; int32 _ask_ns
+       (write-long _ask_ns s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; int32 _OAO
-     (setq _OAO (sys::peek buf ptr- :integer)) (incf ptr- 4)
+   ;; int32 _ask_ns
+     (setq _ask_ns (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;;
    self)
   )
 
 (defclass aruco_pose::nsResponse
   :super ros::object
-  :slots (_ns ))
+  :slots (_ns_result ))
 
 (defmethod aruco_pose::nsResponse
   (:init
    (&key
-    ((:ns __ns) 0)
+    ((:ns_result __ns_result) 0)
     )
    (send-super :init)
-   (setq _ns (round __ns))
+   (setq _ns_result (round __ns_result))
    self)
-  (:ns
-   (&optional __ns)
-   (if __ns (setq _ns __ns)) _ns)
+  (:ns_result
+   (&optional __ns_result)
+   (if __ns_result (setq _ns_result __ns_result)) _ns_result)
   (:serialization-length
    ()
    (+
-    ;; int32 _ns
+    ;; int32 _ns_result
     4
     ))
   (:serialize
    (&optional strm)
    (let ((s (if strm strm
               (make-string-output-stream (send self :serialization-length)))))
-     ;; int32 _ns
-       (write-long _ns s)
+     ;; int32 _ns_result
+       (write-long _ns_result s)
      ;;
      (if (null strm) (get-output-stream-string s))))
   (:deserialize
    (buf &optional (ptr- 0))
-   ;; int32 _ns
-     (setq _ns (sys::peek buf ptr- :integer)) (incf ptr- 4)
+   ;; int32 _ns_result
+     (setq _ns_result (sys::peek buf ptr- :integer)) (incf ptr- 4)
    ;;
    self)
   )
@@ -96,7 +96,7 @@
   :super ros::object
   :slots ())
 
-(setf (get aruco_pose::ns :md5sum-) "8776fa0eb36ce3f8ec3b065ea8aaf653")
+(setf (get aruco_pose::ns :md5sum-) "6db1d56b21aeaaf74af61c1e66674fb6")
 (setf (get aruco_pose::ns :datatype-) "aruco_pose/ns")
 (setf (get aruco_pose::ns :request) aruco_pose::nsRequest)
 (setf (get aruco_pose::ns :response) aruco_pose::nsResponse)
@@ -104,24 +104,26 @@
 (defmethod aruco_pose::nsRequest
   (:response () (instance aruco_pose::nsResponse :init)))
 
-(setf (get aruco_pose::nsRequest :md5sum-) "8776fa0eb36ce3f8ec3b065ea8aaf653")
+(setf (get aruco_pose::nsRequest :md5sum-) "6db1d56b21aeaaf74af61c1e66674fb6")
 (setf (get aruco_pose::nsRequest :datatype-) "aruco_pose/nsRequest")
 (setf (get aruco_pose::nsRequest :definition-)
-      "int32 OAO
+      "int32 ask_ns
 ---
-int32 ns
+int32 ns_result
+
 ")
 
-(setf (get aruco_pose::nsResponse :md5sum-) "8776fa0eb36ce3f8ec3b065ea8aaf653")
+(setf (get aruco_pose::nsResponse :md5sum-) "6db1d56b21aeaaf74af61c1e66674fb6")
 (setf (get aruco_pose::nsResponse :datatype-) "aruco_pose/nsResponse")
 (setf (get aruco_pose::nsResponse :definition-)
-      "int32 OAO
+      "int32 ask_ns
 ---
-int32 ns
+int32 ns_result
+
 ")
 
 
 
-(provide :aruco_pose/ns "8776fa0eb36ce3f8ec3b065ea8aaf653")
+(provide :aruco_pose/ns "6db1d56b21aeaaf74af61c1e66674fb6")
 
 

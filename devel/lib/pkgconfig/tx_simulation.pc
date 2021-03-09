@@ -1,0 +1,8 @@
+prefix=/home/louis/catkin_ws/devel
+
+Name: tx_simulation
+Description: Description of tx_simulation
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

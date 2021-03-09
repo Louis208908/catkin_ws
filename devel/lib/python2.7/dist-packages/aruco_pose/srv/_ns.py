@@ -8,12 +8,12 @@ import struct
 
 
 class nsRequest(genpy.Message):
-  _md5sum = "4a26ed29ee2d854e1ac3e22595442f5e"
+  _md5sum = "a6b1691ab5ec180f4125d5a3869ba886"
   _type = "aruco_pose/nsRequest"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """int32 OAO
+  _full_text = """int32 ask_ns
 """
-  __slots__ = ['OAO']
+  __slots__ = ['ask_ns']
   _slot_types = ['int32']
 
   def __init__(self, *args, **kwds):
@@ -24,7 +24,7 @@ class nsRequest(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       OAO
+       ask_ns
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -33,10 +33,10 @@ class nsRequest(genpy.Message):
     if args or kwds:
       super(nsRequest, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
-      if self.OAO is None:
-        self.OAO = 0
+      if self.ask_ns is None:
+        self.ask_ns = 0
     else:
-      self.OAO = 0
+      self.ask_ns = 0
 
   def _get_types(self):
     """
@@ -50,7 +50,7 @@ class nsRequest(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.OAO
+      _x = self.ask_ns
       buff.write(_get_struct_i().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -65,7 +65,7 @@ class nsRequest(genpy.Message):
       end = 0
       start = end
       end += 4
-      (self.OAO,) = _get_struct_i().unpack(str[start:end])
+      (self.ask_ns,) = _get_struct_i().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -78,7 +78,7 @@ class nsRequest(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      _x = self.OAO
+      _x = self.ask_ns
       buff.write(_get_struct_i().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -94,7 +94,7 @@ class nsRequest(genpy.Message):
       end = 0
       start = end
       end += 4
-      (self.OAO,) = _get_struct_i().unpack(str[start:end])
+      (self.ask_ns,) = _get_struct_i().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -119,12 +119,13 @@ import struct
 
 
 class nsResponse(genpy.Message):
-  _md5sum = "414ec99616e67a0447cefa81e0ded80a"
+  _md5sum = "e2ad2f67474bb9a8e84b2525b4dadf8c"
   _type = "aruco_pose/nsResponse"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """int32 ns
+  _full_text = """int32 ns_result
+
 """
-  __slots__ = ['ns']
+  __slots__ = ['ns_result']
   _slot_types = ['int32']
 
   def __init__(self, *args, **kwds):
@@ -135,7 +136,7 @@ class nsResponse(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       ns
+       ns_result
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -144,10 +145,10 @@ class nsResponse(genpy.Message):
     if args or kwds:
       super(nsResponse, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
-      if self.ns is None:
-        self.ns = 0
+      if self.ns_result is None:
+        self.ns_result = 0
     else:
-      self.ns = 0
+      self.ns_result = 0
 
   def _get_types(self):
     """
@@ -161,7 +162,7 @@ class nsResponse(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.ns
+      _x = self.ns_result
       buff.write(_get_struct_i().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -176,7 +177,7 @@ class nsResponse(genpy.Message):
       end = 0
       start = end
       end += 4
-      (self.ns,) = _get_struct_i().unpack(str[start:end])
+      (self.ns_result,) = _get_struct_i().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -189,7 +190,7 @@ class nsResponse(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      _x = self.ns
+      _x = self.ns_result
       buff.write(_get_struct_i().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -205,7 +206,7 @@ class nsResponse(genpy.Message):
       end = 0
       start = end
       end += 4
-      (self.ns,) = _get_struct_i().unpack(str[start:end])
+      (self.ns_result,) = _get_struct_i().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -222,6 +223,6 @@ def _get_struct_i():
     return _struct_i
 class ns(object):
   _type          = 'aruco_pose/ns'
-  _md5sum = '8776fa0eb36ce3f8ec3b065ea8aaf653'
+  _md5sum = '6db1d56b21aeaaf74af61c1e66674fb6'
   _request_class  = nsRequest
   _response_class = nsResponse

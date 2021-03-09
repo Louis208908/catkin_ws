@@ -1,6 +1,6 @@
 (cl:in-package aruco_pose-srv)
-(cl:export '(OAO-VAL
-          OAO
-          NS-VAL
-          NS
+(cl:export '(ASK_NS-VAL
+          ASK_NS
+          NS_RESULT-VAL
+          NS_RESULT
 ))

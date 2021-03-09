@@ -40,7 +40,7 @@ template<>
 struct MD5Sum< ::aruco_pose::cup > {
   static const char* value()
   {
-    return "82c828fe2774e236745aee3e2d245fe9";
+    return "1ba64ca04594ee6db0df538fffb0ec78";
   }
 
   static const char* value(const ::aruco_pose::cup&) { return value(); }

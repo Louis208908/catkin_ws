@@ -8,12 +8,12 @@ import struct
 
 
 class cupRequest(genpy.Message):
-  _md5sum = "e03e9f73d1355bf38f3e731f90a1fc9e"
+  _md5sum = "25ae256185f7a2b5556316fe4144f4f8"
   _type = "aruco_pose/cupRequest"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """int32 OUO
+  _full_text = """int32 ask_cup
 """
-  __slots__ = ['OUO']
+  __slots__ = ['ask_cup']
   _slot_types = ['int32']
 
   def __init__(self, *args, **kwds):
@@ -24,7 +24,7 @@ class cupRequest(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       OUO
+       ask_cup
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -33,10 +33,10 @@ class cupRequest(genpy.Message):
     if args or kwds:
       super(cupRequest, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
-      if self.OUO is None:
-        self.OUO = 0
+      if self.ask_cup is None:
+        self.ask_cup = 0
     else:
-      self.OUO = 0
+      self.ask_cup = 0
 
   def _get_types(self):
     """
@@ -50,7 +50,7 @@ class cupRequest(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      _x = self.OUO
+      _x = self.ask_cup
       buff.write(_get_struct_i().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -65,7 +65,7 @@ class cupRequest(genpy.Message):
       end = 0
       start = end
       end += 4
-      (self.OUO,) = _get_struct_i().unpack(str[start:end])
+      (self.ask_cup,) = _get_struct_i().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -78,7 +78,7 @@ class cupRequest(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      _x = self.OUO
+      _x = self.ask_cup
       buff.write(_get_struct_i().pack(_x))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
@@ -94,7 +94,7 @@ class cupRequest(genpy.Message):
       end = 0
       start = end
       end += 4
-      (self.OUO,) = _get_struct_i().unpack(str[start:end])
+      (self.ask_cup,) = _get_struct_i().unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -119,12 +119,13 @@ import struct
 
 
 class cupResponse(genpy.Message):
-  _md5sum = "f022abcdee8d409cf204cd68d1527534"
+  _md5sum = "f032d9fb8f53b20dbf71031171aac863"
   _type = "aruco_pose/cupResponse"
   _has_header = False  # flag to mark the presence of a Header object
-  _full_text = """int32[] CupResult
+  _full_text = """int32[] cup_result
+
 """
-  __slots__ = ['CupResult']
+  __slots__ = ['cup_result']
   _slot_types = ['int32[]']
 
   def __init__(self, *args, **kwds):
@@ -135,7 +136,7 @@ class cupResponse(genpy.Message):
     changes.  You cannot mix in-order arguments and keyword arguments.
 
     The available fields are:
-       CupResult
+       cup_result
 
     :param args: complete set of field values, in .msg order
     :param kwds: use keyword arguments corresponding to message field names
@@ -144,10 +145,10 @@ class cupResponse(genpy.Message):
     if args or kwds:
       super(cupResponse, self).__init__(*args, **kwds)
       # message fields cannot be None, assign default values for those that are
-      if self.CupResult is None:
-        self.CupResult = []
+      if self.cup_result is None:
+        self.cup_result = []
     else:
-      self.CupResult = []
+      self.cup_result = []
 
   def _get_types(self):
     """
@@ -161,10 +162,10 @@ class cupResponse(genpy.Message):
     :param buff: buffer, ``StringIO``
     """
     try:
-      length = len(self.CupResult)
+      length = len(self.cup_result)
       buff.write(_struct_I.pack(length))
       pattern = '<%si'%length
-      buff.write(struct.Struct(pattern).pack(*self.CupResult))
+      buff.write(struct.Struct(pattern).pack(*self.cup_result))
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -183,7 +184,7 @@ class cupResponse(genpy.Message):
       start = end
       s = struct.Struct(pattern)
       end += s.size
-      self.CupResult = s.unpack(str[start:end])
+      self.cup_result = s.unpack(str[start:end])
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -196,10 +197,10 @@ class cupResponse(genpy.Message):
     :param numpy: numpy python module
     """
     try:
-      length = len(self.CupResult)
+      length = len(self.cup_result)
       buff.write(_struct_I.pack(length))
       pattern = '<%si'%length
-      buff.write(self.CupResult.tostring())
+      buff.write(self.cup_result.tostring())
     except struct.error as se: self._check_types(struct.error("%s: '%s' when writing '%s'" % (type(se), str(se), str(locals().get('_x', self)))))
     except TypeError as te: self._check_types(ValueError("%s: '%s' when writing '%s'" % (type(te), str(te), str(locals().get('_x', self)))))
 
@@ -219,7 +220,7 @@ class cupResponse(genpy.Message):
       start = end
       s = struct.Struct(pattern)
       end += s.size
-      self.CupResult = numpy.frombuffer(str[start:end], dtype=numpy.int32, count=length)
+      self.cup_result = numpy.frombuffer(str[start:end], dtype=numpy.int32, count=length)
       return self
     except struct.error as e:
       raise genpy.DeserializationError(e)  # most likely buffer underfill
@@ -230,6 +231,6 @@ def _get_struct_I():
     return _struct_I
 class cup(object):
   _type          = 'aruco_pose/cup'
-  _md5sum = '82c828fe2774e236745aee3e2d245fe9'
+  _md5sum = '1ba64ca04594ee6db0df538fffb0ec78'
   _request_class  = cupRequest
   _response_class = cupResponse

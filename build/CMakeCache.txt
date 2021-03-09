@@ -522,6 +522,9 @@ gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 //The directory containing a CMake configuration file for image_transport.
 image_transport_DIR:PATH=/opt/ros/melodic/share/image_transport/cmake
 
+//The directory containing a CMake configuration file for interactive_markers.
+interactive_markers_DIR:PATH=/opt/ros/melodic/share/interactive_markers/cmake
+
 //Value Computed by CMake
 kdl_conversions_BINARY_DIR:STATIC=/home/louis/catkin_ws/build/geometry/kdl_conversions
 
@@ -535,7 +538,7 @@ kdl_conversions_LIB_DEPENDS:STATIC=general;/opt/ros/melodic/lib/libroscpp_serial
 kdl_conversions_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/geometry/kdl_conversions
 
 //Path to a library.
-lib:FILEPATH=/opt/ros/melodic/lib/libcamera_calibration_parsers.so
+lib:FILEPATH=/opt/ros/melodic/lib/libxmlrpcpp.so
 
 //The directory containing a CMake configuration file for message_filters.
 message_filters_DIR:PATH=/opt/ros/melodic/share/message_filters/cmake
@@ -614,6 +617,9 @@ robot_setup_tf_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/robot_setup_tf
 
 //The directory containing a CMake configuration file for rosconsole.
 rosconsole_DIR:PATH=/opt/ros/melodic/share/rosconsole/cmake
+
+//The directory containing a CMake configuration file for rosconsole_bridge.
+rosconsole_bridge_DIR:PATH=/opt/ros/melodic/share/rosconsole_bridge/cmake
 
 //The directory containing a CMake configuration file for roscpp.
 roscpp_DIR:PATH=/opt/ros/melodic/share/roscpp/cmake
@@ -703,6 +709,66 @@ tf_conversions_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/geometry/tf_conversio
 trajectory_msgs_DIR:PATH=/opt/ros/melodic/share/trajectory_msgs/cmake
 
 //Value Computed by CMake
+turtle_publish_BINARY_DIR:STATIC=/home/louis/catkin_ws/build/turtle_publish
+
+//Value Computed by CMake
+turtle_publish_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/turtle_publish
+
+//Value Computed by CMake
+turtlebot3_BINARY_DIR:STATIC=/home/louis/catkin_ws/build/turtlebot3/turtlebot3
+
+//Value Computed by CMake
+turtlebot3_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/turtlebot3/turtlebot3
+
+//Value Computed by CMake
+turtlebot3_bringup_BINARY_DIR:STATIC=/home/louis/catkin_ws/build/turtlebot3/turtlebot3_bringup
+
+//Value Computed by CMake
+turtlebot3_bringup_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/turtlebot3/turtlebot3_bringup
+
+//Value Computed by CMake
+turtlebot3_description_BINARY_DIR:STATIC=/home/louis/catkin_ws/build/turtlebot3/turtlebot3_description
+
+//Value Computed by CMake
+turtlebot3_description_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/turtlebot3/turtlebot3_description
+
+//Value Computed by CMake
+turtlebot3_example_BINARY_DIR:STATIC=/home/louis/catkin_ws/build/turtlebot3/turtlebot3_example
+
+//Value Computed by CMake
+turtlebot3_example_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/turtlebot3/turtlebot3_example
+
+//The directory containing a CMake configuration file for turtlebot3_msgs.
+turtlebot3_msgs_DIR:PATH=/opt/ros/melodic/share/turtlebot3_msgs/cmake
+
+//Value Computed by CMake
+turtlebot3_navigation_BINARY_DIR:STATIC=/home/louis/catkin_ws/build/turtlebot3/turtlebot3_navigation
+
+//Value Computed by CMake
+turtlebot3_navigation_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/turtlebot3/turtlebot3_navigation
+
+//Value Computed by CMake
+turtlebot3_slam_BINARY_DIR:STATIC=/home/louis/catkin_ws/build/turtlebot3/turtlebot3_slam
+
+//Value Computed by CMake
+turtlebot3_slam_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/turtlebot3/turtlebot3_slam
+
+//Value Computed by CMake
+turtlebot3_teleop_BINARY_DIR:STATIC=/home/louis/catkin_ws/build/turtlebot3/turtlebot3_teleop
+
+//Value Computed by CMake
+turtlebot3_teleop_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/turtlebot3/turtlebot3_teleop
+
+//Value Computed by CMake
+tx_simulation_BINARY_DIR:STATIC=/home/louis/catkin_ws/build/tx_simulation
+
+//Value Computed by CMake
+tx_simulation_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/tx_simulation
+
+//The directory containing a CMake configuration file for urdf.
+urdf_DIR:PATH=/opt/ros/melodic/share/urdf/cmake
+
+//Value Computed by CMake
 usb_cam_BINARY_DIR:STATIC=/home/louis/catkin_ws/build/usb_cam
 
 //Dependencies for the target
@@ -710,6 +776,12 @@ usb_cam_LIB_DEPENDS:STATIC=general;avcodec;general;swscale;general;/opt/ros/melo
 
 //Value Computed by CMake
 usb_cam_SOURCE_DIR:STATIC=/home/louis/catkin_ws/src/usb_cam
+
+//The directory containing a CMake configuration file for visualization_msgs.
+visualization_msgs_DIR:PATH=/opt/ros/melodic/share/visualization_msgs/cmake
+
+//The directory containing a CMake configuration file for xacro.
+xacro_DIR:PATH=/opt/ros/melodic/share/xacro/cmake
 
 //The directory containing a CMake configuration file for xmlrpcpp.
 xmlrpcpp_DIR:PATH=/opt/ros/melodic/share/xmlrpcpp/cmake
@@ -852,7 +924,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=23
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=32
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP
